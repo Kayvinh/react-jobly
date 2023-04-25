@@ -1,8 +1,14 @@
 import React from 'react'
 
-const JobCard = () => {
+
+/** Renders information about a single job
+ * 
+ * Props
+ * -job: {id, title, salary, equity}
+ */
+function JobCard({ job }) {
   return (
-    <div>JobCard</div>
+    <div>{job.title}</div>
   )
 }
 

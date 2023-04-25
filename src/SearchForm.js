@@ -1,9 +1,19 @@
 import React from 'react'
 
-const SearchForm = () => {
+/**Form for searching for specific company/job
+ * 
+ * props
+ * -search()
+ * 
+ *  {CompanyList, JobList} -> SearchForm
+ */
+function SearchForm({ search }) {
   return (
-    <div>SearchForm</div>
-  )
+    <form onSubmit={search}>
+      <input type='text'></input>
+      <button>Search</button>
+    </form>
+  );
 }
 
-export default SearchForm
+export default SearchForm;

@@ -10,10 +10,10 @@ import React from 'react'
  * 
  *  CompanyList -> CompanyCard
  */
-const CompanyCard = ({ name, description, logoUrl }) => {
-  return ( 
+function CompanyCard({ name, description, logoUrl }) {
+  return (
     <li>{name}</li>
-    
+
   )
 }
 

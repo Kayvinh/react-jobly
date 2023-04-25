@@ -3,6 +3,10 @@ import RoutesList from "./RoutesList";
 import { BrowserRouter } from "react-router-dom/dist";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/** Jobly Site
+ * 
+ * App -> {Navigation, RoutesList}
+ */
 function App() {
   return (
     <div className="App">
