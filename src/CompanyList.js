@@ -17,6 +17,7 @@ import SearchForm from './SearchForm';
  */
 function CompanyList() {
     const [companies, setCompanies] = useState(null);
+    const [batches, setBatches] = useState(0);
 
     /** gets companies on initial render */
     useEffect(function getCompaniesDataOnMount () {
@@ -42,17 +43,31 @@ function CompanyList() {
         return (
             <div>
                 <SearchForm search={search}/>
-            <ul>
-                {companies.map((c =>
-                    <CompanyCard
-                        key={c.handle}
-                        handle={c.handle}
-                        name={c.name}
-                        description={c.description}
-                        logoUrl={c.logoUrl}
-                    />
-                ))}
-            </ul>
+                
+                <ul>
+                    {/* {companies.map((c =>
+                        <CompanyCard
+                            key={c.handle}
+                            handle={c.handle}
+                            name={c.name}
+                            description={c.description}
+                            logoUrl={c.logoUrl}
+                        />
+                    ))} */}
+
+                    { companies.map((c =>
+                        <CompanyCard
+                            key={c.handle}
+                            handle={c.handle}
+                            name={c.name}
+                            description={c.description}
+                            logoUrl={c.logoUrl}
+                        />
+                     )).filter((c, idx) => 
+                        idx >= batches * 20 && idx <= (batches + 1) * 20
+                     )
+                    }
+                </ul>
             </div>
         );
     }

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom/dist";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Homepage from "./Homepage";
 import CompanyList from "./CompanyList";
