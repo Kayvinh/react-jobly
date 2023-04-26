@@ -16,19 +16,19 @@ import SearchForm from './SearchForm';
  * 
  */
 function CompanyList() {
-    const [companies, setCompanies] = useState([]);//TODO: [] to null
-    //TODO: give functions names in useEffect
+    const [companies, setCompanies] = useState(null);
+
     /** gets companies on initial render */
-    useEffect(() => {
+    useEffect(function getCompaniesDataOnMount () {
         async function getCompaniesData() {
             setCompanies(await JoblyApi.getCompanies());
         }
 
         getCompaniesData();
     }, []);
-    //TODO: handle destructuring in search form
+
     /**gets list of companies, filtered by name, and updates state */
-    async function search({searchTerm}) {
+    async function search(searchTerm) {
         setCompanies(await JoblyApi.searchCompany(searchTerm));
     }
 

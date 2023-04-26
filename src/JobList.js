@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import JobCardList from './JobCardList';
 import SearchForm from './SearchForm';
 import JoblyApi from './api'
-//TODO: list all keys in obj in docstring
-//TODO: all jobs -> jobs
+
 /** Display list of all jobs
  * 
  * Props
  * -none
  * 
  * State: 
- *  - jobs: array of all jobs [{id,title,salary,companyname...},...]
+ *  - jobs: 
+ *     array of jobs [{id,title,salary,companyname, equity, handle...},...]
  * 
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  * 
@@ -19,7 +19,7 @@ function JobList() {
     const [jobs, setJobs] = useState(null)
 
     /** gets all jobs on first render */
-    useEffect(() => {
+    useEffect(function getJobsOnMount() {
         async function getJobs() {
             setJobs(await JoblyApi.getJobs())
         }
@@ -28,7 +28,7 @@ function JobList() {
 
 
     /** searches for jobs by title and updates state*/
-    async function search({ searchTerm }) {
+    async function search(searchTerm) {
         setJobs(await JoblyApi.searchJobs(searchTerm))
     }
 

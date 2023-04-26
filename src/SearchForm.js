@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import { debounce } from "lodash";
 
 const initialSearchTerm = {
   searchTerm: ""
 }
+
 
 /**Form for searching for specific company/job
  * 
@@ -18,6 +20,8 @@ const initialSearchTerm = {
 function SearchForm({ search }) {
   const [formData, setFormData] = useState(initialSearchTerm);
 
+  const debounceSearch = debounce(search, 100);
+
   /** Update form input. */
   function handleChange(evt) {
     const {name, value} = evt.target;
@@ -25,12 +29,14 @@ function SearchForm({ search }) {
       ...formData,
       [name]: value,
     }));
+
+    debounceSearch(formData.searchTerm);
   }
 
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    search(formData);
+    search(formData.searchTerm);
     setFormData(initialSearchTerm);
   }
 

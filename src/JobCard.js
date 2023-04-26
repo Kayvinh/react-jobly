@@ -11,19 +11,19 @@ import './JobCard.css';
  * 
  * JobCardList -> JobCard
  */
-function JobCard({ job }) {
+function JobCard({ title, companyName, salary, equity }) {
   return (
     <div className='JobCard card'>
       <div className='card-body'>
         <div className='card-title'>
           <h6>
-            <b>{job.title}</b>
-            <p>{job.companyName}</p>
+            <b>{title}</b>
+            <p>{companyName}</p>
           </h6>
         </div>
         <small>
-          <div>Salary: {job.salary}</div>
-          <div>Equity: {job.equity}</div>
+          <div>Salary: {salary}</div>
+          <div>Equity: {equity}</div>
         </small>
       </div>
     </div>

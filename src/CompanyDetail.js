@@ -17,11 +17,11 @@ import JoblyApi from './api';
  * 
  */
 function CompanyDetail() {
-  const [ companyDetails, setCompanyDetails ] = useState(null);
+  const [companyDetails, setCompanyDetails] = useState(null);
   const { handle } = useParams();
 
   /**gets company details on initial render */
-  useEffect(() => {
+  useEffect(function getCompanyDetailOnMount() {
     async function getCompanyDetail() {
       setCompanyDetails(await JoblyApi.getCompany(handle));
     }
@@ -30,14 +30,14 @@ function CompanyDetail() {
   }, [handle]);
 
   /** renders company details if loaded */
-  function renderCompanyDetails () {
+  function renderCompanyDetails() {
     if (!companyDetails) return <div>Loading...</div>;
 
     return (
       <>
         <div>{companyDetails.handle}</div>
         <div>{companyDetails.description}</div>
-        <JobCardList jobs={companyDetails.jobs}/>
+        <JobCardList jobs={companyDetails.jobs} />
       </>
     );
   }
@@ -47,7 +47,7 @@ function CompanyDetail() {
     <div className='CompanyDetail'>
       {renderCompanyDetails()}
     </div>
-  )
+  );
 }
 
-export default CompanyDetail
+export default CompanyDetail;

@@ -12,13 +12,20 @@ import JobCard from './JobCard';
  * 
  * {CompanyDetail, JobList} -> JobCardList -> JobCard
 */
-//TODO: consider passing down job data explicitly
+
 function JobCardList({ jobs }) {
   return (
     <div className='JobCardList'>
-      {jobs.map(j => <JobCard key={j.id} job={j} />)}
+      {jobs.map(j => 
+        <JobCard 
+          key={j.id} 
+          title={j.title} 
+          companyName={j.companyName}  
+          salary={j.salary}
+          equity={j.equity}
+        />)}
     </div>
-  )
+  );
 }
 
-export default JobCardList
+export default JobCardList;
