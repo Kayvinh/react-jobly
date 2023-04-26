@@ -5,6 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 /** Jobly Site
  * 
+ * Props
+ * -none
+ * 
+ * State
+ * -none
+ * 
  * App -> {Navigation, RoutesList}
  */
 function App() {

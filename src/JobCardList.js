@@ -1,5 +1,5 @@
-import React from 'react'
-import JobCard from './JobCard'
+import React from 'react';
+import JobCard from './JobCard';
 
 
 /** Renders a list of jobs 
@@ -7,11 +7,15 @@ import JobCard from './JobCard'
  * Props
  * -jobs: [{id, title, salary, equity}, ...]
  * 
+ * State
+ * -none
+ * 
  * {CompanyDetail, JobList} -> JobCardList -> JobCard
 */
+
 function JobCardList({ jobs }) {
   return (
-    <div>
+    <div className='JobCardList'>
       {jobs.map(j => <JobCard job={j} />)}
     </div>
   )

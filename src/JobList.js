@@ -1,10 +1,13 @@
-import React from 'react'
-import JobCardList from './JobCardList'
-import SearchForm from './SearchForm'
+import React from 'react';
+import JobCardList from './JobCardList';
+import SearchForm from './SearchForm';
 
 /** Display list of all jobs
  * 
- * state: 
+ * Props
+ * -none
+ * 
+ * State: 
  *  - jobs: array of all jobs [{id,title,salary,companyname...},...]
  *  - isLoading: Boolean
  * 

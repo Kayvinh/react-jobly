@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 /**Form for searching for specific company/job
  * 
- * props
+ * Props
  * -search()
+ * 
+ * State
+ * formData: search term
  * 
  *  {CompanyList, JobList} -> SearchForm
  */

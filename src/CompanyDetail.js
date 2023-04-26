@@ -1,10 +1,14 @@
-import React from 'react'
-import { useParams } from 'react-router-dom/dist'
-import JobCardList from './JobCardList'
+import React from 'react';
+import { useParams } from 'react-router-dom/dist';
+import JobCardList from './JobCardList';
 
 /** Display specific company detail
  * 
- * state: 
+ * 
+ * Props
+ * -none
+ * 
+ * State: 
  *  - companyDetails: object {handle,name,description...}
  *  - isLoading: Boolean
  * 

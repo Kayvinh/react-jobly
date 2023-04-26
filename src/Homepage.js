@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 /**Renders a simple home page
  * 

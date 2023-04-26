@@ -17,7 +17,7 @@ function Navigation() {
     return (
         <div className="Navigation">
             <div className="container-fluid">
-                <nav className="Navigation navbar navbar-expand-md">
+                <nav className="navbar navbar-expand-md">
                     <NavLink className="navbar-brand" to="/">Jobly</NavLink>
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item me-4">

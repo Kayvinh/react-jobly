@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from 'react';
 import JoblyApi from './api';
 import CompanyCard from './CompanyCard';
@@ -6,7 +6,10 @@ import SearchForm from './SearchForm';
 
 /** Display list of all companies
  * 
- * state: 
+ * Props
+ * -none
+ * 
+ * State: 
  *  - companies: array of all companies [{handle,name,description...},...]
  *  - isLoading: Boolean
  * 
@@ -36,6 +39,7 @@ function CompanyList() {
                 {companies.map((c =>
                     <CompanyCard
                         key={c.handle}
+                        handle={c.handle}
                         name={c.name}
                         description={c.description}
                         logoUrl={c.logoUrl}
