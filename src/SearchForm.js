@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { debounce } from "lodash";
+import './SearchForm.css';
 
 const initialSearchTerm = {
   searchTerm: ""
@@ -44,7 +45,7 @@ function SearchForm({ search }) {
     <form onSubmit={handleSubmit}>
       <input
         name="searchTerm"
-        className="form-control"
+        className="search-click"
         placeholder="Enter search term..."
         onChange={handleChange}
         value={formData.searchTerm}
