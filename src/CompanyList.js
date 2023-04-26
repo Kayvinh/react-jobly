@@ -20,8 +20,6 @@ function CompanyList() {
     const [companies, setCompanies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log("companies", companies)
-
     useEffect(() => {
         async function getCompaniesData() {
             setCompanies(await JoblyApi.getCompanies());
@@ -32,9 +30,14 @@ function CompanyList() {
 
 
 
-    return (
-        <div className='CompanyList'>
-            <SearchForm />
+    /** Render company card
+    *   
+    *   If companies are still loading, display Loading...
+    */
+    function renderCompanies() {
+        if (!companies) return <div>Loading...</div>;
+
+        return (
             <ul>
                 {companies.map((c =>
                     <CompanyCard
@@ -46,6 +49,19 @@ function CompanyList() {
                     />
                 ))}
             </ul>
+        );
+    }
+
+
+    async function search(formData) {
+        setCompanies(await JoblyApi.searchCompany(formData.searchTerm));
+    }
+
+
+    return (
+        <div className='CompanyList'>
+            <SearchForm search={search}/>
+            {renderCompanies()}
         </div>
     )
 }

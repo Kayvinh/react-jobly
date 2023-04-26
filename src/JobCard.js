@@ -13,7 +13,11 @@ import React from 'react';
  */
 function JobCard({ job }) {
   return (
-    <div>{job.title}</div>
+    <div className='JobCard'>
+      <div>{job.title}</div>
+      <div>{job.salary}</div>
+      <div>{job.equity}</div>
+    </div>
   )
 }
 
