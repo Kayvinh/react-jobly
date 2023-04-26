@@ -1,4 +1,9 @@
+.CompanyCard{
+    margin: 1em;
+}
+
 .CompanyCard  a{
+
     text-decoration: none;
     color: black;
 }

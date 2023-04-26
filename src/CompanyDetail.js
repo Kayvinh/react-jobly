@@ -20,8 +20,7 @@ function CompanyDetail() {
   const [ companyDetails, setCompanyDetails ] = useState(null);
   const { handle } = useParams();
 
-  console.log(companyDetails) // null here
-  
+  /**gets company details on initial render */
   useEffect(() => {
     async function getCompanyDetail() {
       setCompanyDetails(await JoblyApi.getCompany(handle));
@@ -30,6 +29,7 @@ function CompanyDetail() {
     getCompanyDetail();
   }, [handle]);
 
+  /** renders company details if loaded */
   function renderCompanyDetails () {
     if (!companyDetails) return <div>Loading...</div>;
 

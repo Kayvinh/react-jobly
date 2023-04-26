@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CompanyCard.css';
 
-
+//TODO: add handle to docstring
 /** Display company information
  * 
  * Props:
