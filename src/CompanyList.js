@@ -40,8 +40,9 @@ function CompanyList() {
         if (!companies) return <div>Loading...</div>;
 
         return (
-            <ul>
+            <div>
                 <SearchForm search={search}/>
+            <ul>
                 {companies.map((c =>
                     <CompanyCard
                         key={c.handle}
@@ -52,11 +53,12 @@ function CompanyList() {
                     />
                 ))}
             </ul>
+            </div>
         );
     }
 
     return (
-        <div className='CompanyList'>
+        <div className='CompanyList container'>
 
             {renderCompanies()}
         </div>

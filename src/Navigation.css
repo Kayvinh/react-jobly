@@ -1,3 +1,15 @@
+.Navigation{
+    background-color: white;
+    border-bottom: 2px solid lightgray;
+    margin-bottom: 1em;
+}
+
+.Navigation a{
+    text-decoration: none;
+    color: black;
+
+}
+
 .active {
     font-weight: bold;
 }

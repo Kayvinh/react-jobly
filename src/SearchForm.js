@@ -21,7 +21,7 @@ const initialSearchTerm = {
 function SearchForm({ search }) {
   const [formData, setFormData] = useState(initialSearchTerm);
 
-  const debounceSearch = debounce(search, 100);
+  const debounceSearch = debounce(search, 500);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -42,7 +42,7 @@ function SearchForm({ search }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='searchForm' onSubmit={handleSubmit}>
       <input
         name="searchTerm"
         className="search-click"
@@ -51,7 +51,7 @@ function SearchForm({ search }) {
         value={formData.searchTerm}
         aria-label="searchTerm"
       />
-      <button>Search</button>
+      <button className='btn  btn-primary'>Search</button>
     </form>
   );
 }

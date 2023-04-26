@@ -1,0 +1,7 @@
+.Homepage{
+    text-shadow: 2px 2px 5px #34302F;
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+}

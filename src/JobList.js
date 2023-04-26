@@ -39,7 +39,7 @@ function JobList() {
         }
 
         return (
-            <div>
+            <div className='container'>
                 <SearchForm search={search} />
                 <JobCardList jobs={jobs} />
             </div>
@@ -48,7 +48,6 @@ function JobList() {
 
     return (
         <div className='JobList'>
-            <h1>Jobs</h1>
             {renderJobs()}
         </div>
     )

@@ -17,7 +17,7 @@ import './CompanyCard.css';
  */
 function CompanyCard({ name, handle, description, logoUrl }) {
   return (
-    <div className="CompanyCard card">
+    <div className="CompanyCard card container-row">
       <Link to={`/companies/${handle}`}>
       <div className='card-body '>
         <h6 className='card-title'>

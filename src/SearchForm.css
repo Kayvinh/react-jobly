@@ -1,3 +1,13 @@
+.searchForm{
+  text-align: center;
+}
+
+.searchForm button{
+  height: 52px;
+  margin-left: .5em;
+}
+
+
 .search-click {
     border: 1px solid #ccc;
     outline: none;

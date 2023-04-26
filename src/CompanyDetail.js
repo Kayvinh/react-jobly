@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom/dist';
 import { useState, useEffect } from 'react';
 import JobCardList from './JobCardList';
 import JoblyApi from './api';
+import CompanyCard from './CompanyCard';
 
 /** Display specific company detail
  * 
@@ -35,8 +36,10 @@ function CompanyDetail() {
 
     return (
       <>
-        <div>{companyDetails.handle}</div>
-        <div>{companyDetails.description}</div>
+        <div className='col-md-8 offset-md-2'>
+          <h6>{companyDetails.name}</h6>
+          <div>{companyDetails.description}</div>
+        </div>
         <JobCardList jobs={companyDetails.jobs} />
       </>
     );
@@ -44,7 +47,7 @@ function CompanyDetail() {
 
   return (
 
-    <div className='CompanyDetail'>
+    <div className='CompanyDetail container'>
       {renderCompanyDetails()}
     </div>
   );
