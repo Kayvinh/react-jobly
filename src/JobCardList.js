@@ -5,7 +5,7 @@ import JobCard from './JobCard';
 /** Renders a list of jobs 
  * 
  * Props
- * -jobs: [{id, title, salary, equity}, ...]
+ * -jobs: [{id, title, salary, equity, companyName}, ...]
  * 
  * State
  * -none

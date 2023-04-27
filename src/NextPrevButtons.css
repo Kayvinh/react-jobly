@@ -1,0 +1,7 @@
+.NextPrevButtons{
+    text-align: center;
+}
+
+.NextPrevButtons button{
+    margin: 0.5em;
+}

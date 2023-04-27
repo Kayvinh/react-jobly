@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import JobCardList from './JobCardList';
 import SearchForm from './SearchForm';
 import JoblyApi from './api'
+import NextPrevButtons from './NextPrevButtons';
 
 /** Display list of all jobs
  * 
@@ -16,7 +17,9 @@ import JoblyApi from './api'
  * 
  */
 function JobList() {
-    const [jobs, setJobs] = useState(null)
+    const [jobs, setJobs] = useState(null);
+    const [batch, setBatch] = useState(0);
+    const batchSize = 10;
 
     /** gets all jobs on first render */
     useEffect(function getJobsOnMount() {
@@ -29,7 +32,18 @@ function JobList() {
 
     /** searches for jobs by title and updates state*/
     async function search(searchTerm) {
-        setJobs(await JoblyApi.searchJobs(searchTerm))
+        setJobs(await JoblyApi.searchJobs(searchTerm));
+        setBatch(0);
+    }
+
+    /** updates state to show next set of cjobs */
+    function showNext() {
+        setBatch(b => b + 1);
+    }
+    
+    /** updates state to show previous set of jobs */
+    function showPrevious() {
+        setBatch(b => b - 1);
     }
 
     /** renders jobs once they have loaded */
@@ -39,9 +53,24 @@ function JobList() {
         }
 
         return (
-            <div className='container'>
+            <div >
                 <SearchForm search={search} />
-                <JobCardList jobs={jobs} />
+                <NextPrevButtons 
+                next={showNext} 
+                prev={showPrevious} 
+                numBatches={jobs.length/batchSize - 1}
+                currentBatch={batch} />
+
+                <JobCardList jobs={jobs.filter((j, idx) =>
+                            idx >= batch * batchSize && 
+                            idx < (batch + 1) * batchSize
+                        )} />
+
+                <NextPrevButtons 
+                next={showNext} 
+                prev={showPrevious} 
+                numBatches={jobs.length/batchSize - 1}
+                currentBatch={batch} />
             </div>
         )
     }

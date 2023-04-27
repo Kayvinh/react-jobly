@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div>
+  <div
+    class="Homepage d-flex justify-content-start"
+  >
+    <div
+      class="container text-center"
+    >
+      <h1
+        class="mb-4 fw-bold"
+      >
+        Jobly
+      </h1>
+      <p
+        class="lead"
+      >
+         All the jobs in one, convenient place.
+      </p>
+    </div>
+  </div>
+</div>
+`;

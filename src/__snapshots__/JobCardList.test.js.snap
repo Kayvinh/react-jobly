@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div>
+  <div
+    class="JobCardList"
+  >
+    <div
+      class="JobCard card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          class="card-title"
+        >
+          <h6>
+            <b>
+              test title 1
+            </b>
+            <p>
+              test company name 1
+            </p>
+          </h6>
+        </div>
+        <small>
+          <div>
+            Salary: 
+            100
+          </div>
+          <div>
+            Equity: 
+            0.01
+          </div>
+        </small>
+      </div>
+    </div>
+    <div
+      class="JobCard card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          class="card-title"
+        >
+          <h6>
+            <b>
+              test title 2
+            </b>
+            <p>
+              test company name 2
+            </p>
+          </h6>
+        </div>
+        <small>
+          <div>
+            Salary: 
+            200
+          </div>
+          <div>
+            Equity: 
+            0.02
+          </div>
+        </small>
+      </div>
+    </div>
+    <div
+      class="JobCard card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          class="card-title"
+        >
+          <h6>
+            <b>
+              test title 3
+            </b>
+            <p>
+              test company name 3
+            </p>
+          </h6>
+        </div>
+        <small>
+          <div>
+            Salary: 
+            300
+          </div>
+          <div>
+            Equity: 
+            0.03
+          </div>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+`;
