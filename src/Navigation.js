@@ -8,10 +8,12 @@ import "./Navigation.css";
  * shows navigation bar
  * 
  * Props
- * -none
+ * -logout() handles logging out user
  * 
  * State
  * -none
+ * 
+ * uses context: user.username
  * 
  * App -> Navigation
  */

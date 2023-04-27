@@ -14,7 +14,9 @@ const initialFormData = {
  * -login()
  * 
  * State
- * formData: user login data
+ * -formData: user login data
+ *  {username, password}
+ * -errors: array of errors on bad submission
  * 
  *  RoutesList -> LoginForm
  */

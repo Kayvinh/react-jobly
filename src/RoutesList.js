@@ -15,6 +15,7 @@ import ProfileForm from "./ProfileForm";
  * Props
  * -login(): for logging in user
  * -signUp(): for signing up users
+ * -editProfile(): for editing profiles
  * 
  * State
  * -none

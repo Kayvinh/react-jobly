@@ -53,6 +53,7 @@ function SignUpForm({ signUp }) {
                             <div className='form-group'>
                                 <label htmlFor="name">Username:</label>
                                 <input
+                                    required
                                     className='form-control'
                                     name="username"
                                     value={formData.username}
@@ -63,6 +64,8 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="password">Password:</label>
                                 <input
+                                    required
+                                    minLength={5}
                                     className='form-control'
                                     type="password"
                                     name="password"
@@ -74,6 +77,7 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="firstName">First name:</label>
                                 <input
+                                    required
                                     className='form-control'
                                     name="firstName"
                                     value={formData.firstName}
@@ -84,6 +88,7 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="lastName">Last name:</label>
                                 <input
+                                    required
                                     className='form-control'
                                     name="lastName"
                                     value={formData.lastName}
@@ -94,6 +99,8 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
                                 <input
+                                    required
+                                    minLength={6}
                                     className='form-control'
                                     name="email"
                                     value={formData.email}

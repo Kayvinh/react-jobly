@@ -14,6 +14,8 @@ import './SignUpForm.css';
  * -formData:
  *  {username, firstName, lastName, email}
  * 
+ * uses context: user.username, user.firstName, user.lastName, user.email
+ * 
  * RoutesList -> ProfileForm
  */
 function ProfileForm ({ editProfile })  {
@@ -70,6 +72,7 @@ function ProfileForm ({ editProfile })  {
                             <div className="form-group">
                                 <label htmlFor="firstName">First name:</label>
                                 <input
+                                    required
                                     className='form-control'
                                     name="firstName"
                                     value={formData.firstName}
@@ -80,6 +83,7 @@ function ProfileForm ({ editProfile })  {
                             <div className="form-group">
                                 <label htmlFor="lastName">Last name:</label>
                                 <input
+                                    required
                                     className='form-control'
                                     name="lastName"
                                     value={formData.lastName}
@@ -90,6 +94,8 @@ function ProfileForm ({ editProfile })  {
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
                                 <input
+                                    required
+                                    minLength={6}
                                     className='form-control'
                                     name="email"
                                     value={formData.email}

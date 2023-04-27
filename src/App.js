@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import userContext from "./userContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 
 /** Jobly Site
@@ -19,24 +19,41 @@ import JoblyApi from "./api";
  * App -> {Navigation, RoutesList}
  */
 function App() {
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState(null)
   console.log("user:", user);
+  JoblyApi.token = token;
 
-  /**signs up a user */
+  useEffect(function updateUserOnTokenChange() {
+    async function getUser(){
+      setUser(token ? await JoblyApi.getSignedInUser() : null)
+    }
+    getUser();
+  }, [token])
+
+  /**signs up and logs in user
+   * keeps token in joblyApi
+  */
   async function signUp(formData) {
-    setUser(await JoblyApi.signUp(formData));
+    setToken(await JoblyApi.signUp(formData));
   }
 
+  /** logs in a user 
+   * keeps token in joblyApi
+  */
   async function login(formData) {
-    setUser(await JoblyApi.login(formData));
+    setToken(await JoblyApi.login(formData));
   }
 
-  /** Clear token and set user to null */
+  /** Clear token  */
   function logout() {
-    JoblyApi.clearToken();
-    setUser(null);
+    setToken(null);
   }
 
+  /** edits user info
+   * takes {username, firstName, lastName, email}
+   * username cannot be edited.
+   */
   async function editProfile(formData) {
     setUser(await JoblyApi.editProfile(formData));
   }

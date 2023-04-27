@@ -9,7 +9,10 @@ import "./NextPrevButtons.css"
  * -numBatches: number of batches the component can show
  * -currentBatch: the batch we are currently showing. use for disabling buttons
  * 
+ * State
+ * -none
  * 
+ * {JobList, CompanyList} -> NextPrevButtons
  */
 function NextPrevButtons({ next, prev, numBatches, currentBatch }) {
 

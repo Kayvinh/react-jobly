@@ -11,6 +11,8 @@ import { useContext } from 'react';
  * State
  * -none
  * 
+ * uses context: user.firstName
+ * 
  * RoutesList -> Homepage
  */
 
