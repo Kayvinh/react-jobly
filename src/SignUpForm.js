@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './SignUpForm.css';
+import { Navigate } from 'react-router-dom';
 
 const initialFormData = {
     username: "",
@@ -10,15 +11,27 @@ const initialFormData = {
     email: ""
 }
 
+/**renders and manages form for signup
+ * 
+ * Props
+ * -signUp(): handles signing up
+ * 
+ * State
+ * -formData:
+ *  {username, password, firstName, lastName, email}
+ * 
+ * RoutesList -> signUpForm
+ */
 function SignUpForm({ signUp }) {
     const [formData, setFormData] = useState(initialFormData);
 
-    /** Send {name, quantity} to parent
-     *    & clear form. */
-    function handleSubmit(evt) {
+    /** Send formData to parent
+     *  Redirect to home
+     */
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        signUp(formData);
-        setFormData(initialFormData);
+        await signUp(formData);
+        return <Navigate to="/" />
     }
 
     /** Update local state w/curr state of input elem */
@@ -87,7 +100,7 @@ function SignUpForm({ signUp }) {
                                     onChange={handleChange}
                                 />
                             </div>
-                            <button>Submit</button>
+                            <button className="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>

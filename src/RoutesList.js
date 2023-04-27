@@ -13,21 +13,21 @@ import ProfileForm from "./ProfileForm";
 /** renders our routes when navigated to
  * 
  * Props
- * -none
+ * -signUp(): for signing up users
  * 
  * State
  * -none
  * 
  * App -> RoutesList
 */
-function RoutesList() {
+function RoutesList({ signUp }) {
     const { user } = useContext(userContext);
 
     if(!user) {
         return (
             <Routes>
                 <Route path="/login" element={<LoginForm />} />
-                <Route path="/signup" element={<SignUpForm />} />
+                <Route path="/signup" element={<SignUpForm signUp={signUp}/>} />
                 <Route path="/" element={<Homepage />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>

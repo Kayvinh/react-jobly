@@ -1,3 +1,7 @@
 .SignUpForm {
     color: black;
 }
+
+.SignUpForm button{
+    margin-top: 0.5em;
+}

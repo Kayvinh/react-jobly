@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 // const axios = require("axios");
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
@@ -10,20 +11,21 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  * be any API-aware stuff elsewhere in the frontend.
  *
  */
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+//         "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+//         "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc
 
 class JoblyApi {
     // Remember, the backend needs to be authorized with a token
     // We're providing a token you can use to interact with the backend API
     // DON'T MODIFY THIS TOKEN
-    static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-        "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-        "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+    static token = "";
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
 
         const url = `${BASE_URL}/${endpoint}`;
-        const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+        const headers = JoblyApi.token ? { Authorization: `Bearer ${JoblyApi.token}` } : {};
         const params = (method === "get")
             ? data
             : {};
@@ -72,6 +74,40 @@ class JoblyApi {
     static async searchJobs(title) {
         let res = await this.request(`jobs/`, {title});
         return res.jobs;
+    }
+
+    /** Signs up a user given user data 
+     * user like {username, password, firstName, lastName, email}
+     * 
+     * sets token for further requests.
+     * returns user info.
+     * 
+     * returns {user}
+    */
+    static async signUp(user) {
+        let res = await this.request(`auth/register/`, user, "post");
+        JoblyApi.token = res.token;
+        const decoded = jwt_decode(JoblyApi.token)
+        return await JoblyApi.getSignedInUser(decoded.username);
+    }
+
+    /** logs in a user, setting token for future requests.
+     * 
+     * credentials like {username, password}
+     * 
+     * returns {user}
+     */
+    static async logIn(credentials) {
+        let res = await this.request(`auth/token/`, credentials, "post");
+        JoblyApi.token = res.token;
+        const decoded = jwt_decode(JoblyApi.token)
+        return await JoblyApi.getSignedInUser(decoded.username);
+    }
+
+    static async getSignedInUser(username) {
+        let res = await this.request(`users/${username}`)
+        console.log("Signed in as: ", res.user);
+        return res.user;
     }
 
     // obviously, you'll add a lot here ...
