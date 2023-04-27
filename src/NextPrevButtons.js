@@ -24,7 +24,7 @@ function NextPrevButtons({ next, prev, numBatches, currentBatch }) {
             <button
                 className='btn btn-primary'
                 onClick={next}
-                disabled={(currentBatch === numBatches)}>
+                disabled={(currentBatch >= numBatches)}>
                 Next
             </button>
         </div>
