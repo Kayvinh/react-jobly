@@ -60,12 +60,14 @@ function JobList() {
                 prev={showPrevious} 
                 numBatches={jobs.length/batchSize - 1}
                 currentBatch={batch} />
+                <div className='container'>
 
+            
                 <JobCardList jobs={jobs.filter((j, idx) =>
                             idx >= batch * batchSize && 
                             idx < (batch + 1) * batchSize
                         )} />
-
+                    </div>
                 <NextPrevButtons 
                 next={showNext} 
                 prev={showPrevious} 
