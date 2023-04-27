@@ -1,20 +1,38 @@
 import React from 'react'
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import "./LoginForm.css"
 
 const initialFormData = {
     username: "",
     password: "",
 }
 
+/** Form for logging in user
+ * 
+ * Props
+ * -login()
+ * 
+ * State
+ * formData: user login data
+ * 
+ *  RoutesList -> LoginForm
+ */
+
 function LoginForm ({ login })  {
     const [formData, setFormData] = useState(initialFormData);
+    const [errors, setErrors] = useState(null);
 
     /** Send {name, quantity} to parent
      *    & clear form. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
       evt.preventDefault();
-      login(formData);
-      setFormData(initialFormData);
+      try {
+        await login(formData);
+        return <Navigate to="/" />
+      } catch(err) {
+        setErrors(err);
+      }
     }
   
     /** Update local state w/curr state of input elem */
@@ -28,24 +46,33 @@ function LoginForm ({ login })  {
   
     /** render form */
     return (
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Username:</label>
-        <input
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-  
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-  
-        <button>Submit</button>
-      </form>
+      <div className="LoginForm col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <div className="card">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <label className="form-label" htmlFor="name">Username:</label>
+              <input
+                className='form-control'
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+              />
+              <label className="form-label" htmlFor="password">Password:</label>
+              <input
+                className='form-control'
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <button className='btn btn-primary'>Submit</button>
+            </form>
+            {errors && errors.map(e =>
+              <div className='text-danger'>{e}!</div>
+            )}
+          </div>
+        </div>
+      </div>
     );
 }
 

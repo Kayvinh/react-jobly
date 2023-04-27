@@ -97,7 +97,7 @@ class JoblyApi {
      * 
      * returns {user}
      */
-    static async logIn(credentials) {
+    static async login(credentials) {
         let res = await this.request(`auth/token/`, credentials, "post");
         JoblyApi.token = res.token;
         const decoded = jwt_decode(JoblyApi.token)
@@ -108,6 +108,18 @@ class JoblyApi {
         let res = await this.request(`users/${username}`)
         console.log("Signed in as: ", res.user);
         return res.user;
+    }
+
+    static clearToken() {
+        JoblyApi.token = '';
+    }
+
+    static async editProfile(formData){
+        let user = formData;
+        const {username, ...restOfUser} = user;
+
+        let res = await this.request(`users/${username}`, restOfUser, "patch")
+        return res.user
     }
 
     // obviously, you'll add a lot here ...

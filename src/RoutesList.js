@@ -13,6 +13,7 @@ import ProfileForm from "./ProfileForm";
 /** renders our routes when navigated to
  * 
  * Props
+ * -login(): for logging in user
  * -signUp(): for signing up users
  * 
  * State
@@ -20,13 +21,13 @@ import ProfileForm from "./ProfileForm";
  * 
  * App -> RoutesList
 */
-function RoutesList({ signUp }) {
+function RoutesList({ signUp, login, editProfile }) {
     const { user } = useContext(userContext);
 
     if(!user) {
         return (
             <Routes>
-                <Route path="/login" element={<LoginForm />} />
+                <Route path="/login" element={<LoginForm login={login}/>} />
                 <Route path="/signup" element={<SignUpForm signUp={signUp}/>} />
                 <Route path="/" element={<Homepage />} />
                 <Route path="*" element={<Navigate to="/" />} />
@@ -39,7 +40,7 @@ function RoutesList({ signUp }) {
                 <Route path="/companies/:handle" element={<CompanyDetail />} />
                 <Route path="/companies/" element={<CompanyList />} />
                 <Route path="/jobs/" element={<JobList />} />
-                <Route path="/profile" element={<ProfileForm />} />
+                <Route path="/profile" element={<ProfileForm editProfile={editProfile} />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         );

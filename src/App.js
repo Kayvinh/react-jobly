@@ -24,15 +24,29 @@ function App() {
 
   /**signs up a user */
   async function signUp(formData) {
-    setUser(await JoblyApi.signUp(formData))
+    setUser(await JoblyApi.signUp(formData));
+  }
+
+  async function login(formData) {
+    setUser(await JoblyApi.login(formData));
+  }
+
+  /** Clear token and set user to null */
+  function logout() {
+    JoblyApi.clearToken();
+    setUser(null);
+  }
+
+  async function editProfile(formData) {
+    setUser(await JoblyApi.editProfile(formData));
   }
 
   return (
     <div className="App" >
       <userContext.Provider value={{user: user}}>
         <BrowserRouter>
-          <Navigation />
-          <RoutesList signUp={signUp}/>
+          <Navigation logout={logout}/>
+          <RoutesList editProfile={editProfile} login={login} signUp={signUp}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>

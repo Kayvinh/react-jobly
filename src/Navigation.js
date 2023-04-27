@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import userContext from "./userContext";
 import "./Navigation.css";
@@ -15,7 +15,7 @@ import "./Navigation.css";
  * 
  * App -> Navigation
  */
-function Navigation() {
+function Navigation({ logout }) {
     const { user } = useContext(userContext);
 
     return (
@@ -42,6 +42,9 @@ function Navigation() {
                                 </li>
                                 <li className="nav-item me-4">
                                     <NavLink to="/profile">Profile</NavLink>
+                                </li>
+                                <li className="nav-item me-4">
+                                    <Link onClick={logout} to="/">Log out {user.username}</Link>
                                 </li>
                             </>
                         }
