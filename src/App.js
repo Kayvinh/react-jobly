@@ -25,9 +25,9 @@ function App() {
     <div className="App" >
       <userContext.Provider value={{user: user}}>
         <BrowserRouter>
-        <Navigation />
-        <RoutesList />
-      </BrowserRouter>
+          <Navigation />
+          <RoutesList />
+        </BrowserRouter>
       </userContext.Provider>
     </div>
   );

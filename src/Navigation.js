@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import userContext from "./userContext";
 import "./Navigation.css";
 
 /**Navigation
@@ -14,18 +16,35 @@ import "./Navigation.css";
  * App -> Navigation
  */
 function Navigation() {
+    const { user } = useContext(userContext);
+
     return (
         <div className="Navigation">
             <div className="container-fluid">
                 <nav className="navbar navbar-expand-md">
                     <NavLink className="navbar-brand" to="/">Jobly</NavLink>
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item me-4">
-                            <NavLink to="/companies">Companies</NavLink>
-                        </li>
-                        <li className="nav-item me-4">
-                            <NavLink to="/jobs">Jobs</NavLink>
-                        </li>
+                        {!user
+                            ? <>
+                                <li className="nav-item me-4">
+                                    <NavLink to="/login">Login</NavLink>
+                                </li>
+                                <li className="nav-item me-4">
+                                    <NavLink to="/signup">Signup</NavLink>
+                                </li>
+                            </>
+                            : <>
+                                <li className="nav-item me-4">
+                                    <NavLink to="/companies">Companies</NavLink>
+                                </li>
+                                <li className="nav-item me-4">
+                                    <NavLink to="/jobs">Jobs</NavLink>
+                                </li>
+                                <li className="nav-item me-4">
+                                    <NavLink to="/profile">Profile</NavLink>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </nav>
             </div>
