@@ -31,7 +31,7 @@ function RoutesList() {
                 <Route path="/" element={<Homepage />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-        )
+        );
     } else {
         return (
             <Routes>
