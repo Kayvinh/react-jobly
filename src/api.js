@@ -120,7 +120,8 @@ class JoblyApi {
         let user = profileData;
         const { username, ...restOfUser } = user;
 
-        let res = await this.request(`users/${username}`, restOfUser, "patch")
+        await this.request(`users/${username}`, restOfUser, "patch")
+        let res = await this.getSignedInUser();
         return res.user
     }
 
