@@ -13,13 +13,14 @@ import ProfileForm from "./ProfileForm";
  * -login(): for logging in user
  * -signUp(): for signing up users
  * -editProfile(): for editing profiles
+ * -apply(): for applying to jobs
  * 
  * State
  * -none
  * 
  * App -> RoutesList
 */
-function RoutesList({ signUp, login, editProfile, user }) {
+function RoutesList({ signUp, login, editProfile, apply, user }) {
     if (!user) {
         return (
             <Routes>
@@ -33,9 +34,13 @@ function RoutesList({ signUp, login, editProfile, user }) {
         return (
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="/companies/:handle" element={<CompanyDetail />} />
+                <Route
+                    path="/companies/:handle"
+                    element={
+                        <CompanyDetail
+                            apply={apply} />} />
                 <Route path="/companies/" element={<CompanyList />} />
-                <Route path="/jobs/" element={<JobList />} />
+                <Route path="/jobs/" element={<JobList apply={apply} />} />
                 <Route
                     path="/profile"
                     element={<ProfileForm

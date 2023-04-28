@@ -7,7 +7,7 @@ import NextPrevButtons from './NextPrevButtons';
 /** Display list of all jobs
  * 
  * Props
- * -none
+ * -apply()"" for applying to jobs
  * 
  * State: 
  *  - jobs: 
@@ -16,10 +16,11 @@ import NextPrevButtons from './NextPrevButtons';
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  * 
  */
-function JobList() {
+function JobList({apply}) {
     const [jobs, setJobs] = useState(null);
     const [batch, setBatch] = useState(0);
     const batchSize = 10;
+    console.warn("JOBS", jobs);
 
     /** gets all jobs on first render */
     useEffect(function getJobsOnMount() {
@@ -40,7 +41,7 @@ function JobList() {
     function showNext() {
         setBatch(b => b + 1);
     }
-    
+
     /** updates state to show previous set of jobs */
     function showPrevious() {
         setBatch(b => b - 1);
@@ -55,24 +56,25 @@ function JobList() {
         return (
             <div >
                 <SearchForm search={search} />
-                <NextPrevButtons 
-                next={showNext} 
-                prev={showPrevious} 
-                numBatches={jobs.length/batchSize - 1}
-                currentBatch={batch} />
+                <NextPrevButtons
+                    next={showNext}
+                    prev={showPrevious}
+                    numBatches={jobs.length / batchSize - 1}
+                    currentBatch={batch} />
                 <div className='container'>
 
-            
-                <JobCardList jobs={jobs.filter((j, idx) =>
-                            idx >= batch * batchSize && 
-                            idx < (batch + 1) * batchSize
-                        )} />
-                    </div>
-                <NextPrevButtons 
-                next={showNext} 
-                prev={showPrevious} 
-                numBatches={jobs.length/batchSize - 1}
-                currentBatch={batch} />
+
+                    <JobCardList jobs={jobs.filter((j, idx) =>
+                        idx >= batch * batchSize &&
+                        idx < (batch + 1) * batchSize
+                    )}
+                        apply={apply} />
+                </div>
+                <NextPrevButtons
+                    next={showNext}
+                    prev={showPrevious}
+                    numBatches={jobs.length / batchSize - 1}
+                    currentBatch={batch} />
             </div>
         )
     }

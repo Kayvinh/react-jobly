@@ -6,6 +6,7 @@ import JobCard from './JobCard';
  * 
  * Props
  * -jobs: [{id, title, salary, equity, companyName}, ...]
+ * -apply(): for applying to jobs
  * 
  * State
  * -none
@@ -13,16 +14,18 @@ import JobCard from './JobCard';
  * {CompanyDetail, JobList} -> JobCardList -> JobCard
 */
 
-function JobCardList({ jobs }) {
+function JobCardList({ jobs, apply }) {
   return (
     <div className='JobCardList'>
       {jobs.map(j => 
         <JobCard 
-          key={j.id} 
+          key={j.id}
+          id={j.id} 
           title={j.title} 
           companyName={j.companyName}  
           salary={j.salary}
           equity={j.equity}
+          apply={apply}
         />)}
     </div>
   );

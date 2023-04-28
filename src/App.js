@@ -23,6 +23,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.warn("USER", user);
+
 
   /** Checks for logged in user, and keeps them logged in  */
   useEffect(function checkTokenOnMount() {
@@ -72,6 +74,13 @@ function App() {
     setUser(await JoblyApi.editProfile(editData));
   }
 
+  /** applies to job and updates state */
+  async function apply(jobId) {
+    const appliedId= await JoblyApi.applyToJob(jobId);
+    setUser(u => {
+      return {...u, applications: [...u.applications, appliedId] }})
+  }
+
   return (
     <div className="App" >
       {isLoading ?
@@ -83,6 +92,7 @@ function App() {
               editProfile={editProfile}
               login={login}
               signUp={signUp}
+              apply={apply}
             />
           </BrowserRouter>
         </userContext.Provider>

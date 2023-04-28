@@ -59,7 +59,7 @@ class JoblyApi {
     /** Get list of companies filtering by name */
 
     static async searchCompany(nameLike) {
-        let res = await this.request(`companies/`, {nameLike});
+        let res = await this.request(`companies/`, { nameLike });
         return res.companies;
     }
 
@@ -75,7 +75,7 @@ class JoblyApi {
     /** Get list of jobs filtering by title */
 
     static async searchJobs(title) {
-        let res = await this.request(`jobs/`, {title});
+        let res = await this.request(`jobs/`, { title });
         return res.jobs;
     }
 
@@ -116,10 +116,10 @@ class JoblyApi {
      * 
      * returns {username, firstName, lastName, email, applications[]}
      */
-    static async editProfile(profileData){
+    static async editProfile(profileData) {
         let user = profileData;
-        const {username, ...restOfUser} = user;
-        
+        const { username, ...restOfUser } = user;
+
         let res = await this.request(`users/${username}`, restOfUser, "patch")
         return res.user
     }
@@ -138,7 +138,20 @@ class JoblyApi {
     static clearToken() {
         JoblyApi.token = '';
     }
-    
+
+    /** applies to job with specified id and returns that job Id
+     * 
+     */
+    static async applyToJob(jobId) {
+        const decoded = jwt_decode(this.token);
+        console.log("!!!!!!!!jobId!!!!!!!!!", jobId);
+        let res = await this.request(
+            `users/${decoded.username}/jobs/${jobId}`,
+            {},
+            "post")
+        return res.applied;
+    }
+
     // obviously, you'll add a lot here ...
 }
 

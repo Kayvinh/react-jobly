@@ -8,7 +8,7 @@ import JoblyApi from './api';
  * 
  * 
  * Props
- * -none
+ * -apply(): function for applying to jobs
  * 
  * State: 
  *  - companyDetails: object {handle,name,description...}
@@ -16,7 +16,7 @@ import JoblyApi from './api';
  * RoutesList -> CompanyDetail -> JobCardList
  * 
  */
-function CompanyDetail() {
+function CompanyDetail({ apply }) {
   const [companyDetails, setCompanyDetails] = useState(null);
   const { handle } = useParams();
 
@@ -39,7 +39,7 @@ function CompanyDetail() {
           <h6>{companyDetails.name}</h6>
           <div>{companyDetails.description}</div>
         </div>
-        <JobCardList jobs={companyDetails.jobs} />
+        <JobCardList jobs={companyDetails.jobs} apply={apply} />
       </>
     );
   }
