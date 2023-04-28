@@ -144,7 +144,6 @@ class JoblyApi {
      */
     static async applyToJob(jobId) {
         const decoded = jwt_decode(this.token);
-        console.log("!!!!!!!!jobId!!!!!!!!!", jobId);
         let res = await this.request(
             `users/${decoded.username}/jobs/${jobId}`,
             {},

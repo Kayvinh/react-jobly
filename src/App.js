@@ -23,7 +23,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.warn("USER", user);
 
 
   /** Checks for logged in user, and keeps them logged in  */

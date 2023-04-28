@@ -20,7 +20,7 @@ function JobList({apply}) {
     const [jobs, setJobs] = useState(null);
     const [batch, setBatch] = useState(0);
     const batchSize = 10;
-    console.warn("JOBS", jobs);
+
 
     /** gets all jobs on first render */
     useEffect(function getJobsOnMount() {
