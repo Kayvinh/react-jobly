@@ -23,13 +23,11 @@ function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.warn("USER", user);
-
 
   /** Checks for logged in user, and keeps them logged in  */
   useEffect(function checkTokenOnMount() {
     async function checkToken() {
-      if(localStorage.token) {
+      if (localStorage.token) {
         JoblyApi.token = localStorage.token
         setUser(await JoblyApi.getSignedInUser());
       }
@@ -76,9 +74,10 @@ function App() {
 
   /** applies to job and updates state */
   async function apply(jobId) {
-    const appliedId= await JoblyApi.applyToJob(jobId);
+    const appliedId = await JoblyApi.applyToJob(jobId);
     setUser(u => {
-      return {...u, applications: [...u.applications, appliedId] }})
+      return { ...u, applications: [...u.applications, appliedId] }
+    })
   }
 
   return (

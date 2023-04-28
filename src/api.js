@@ -45,21 +45,21 @@ class JoblyApi {
     /** Get details on a company by handle. */
 
     static async getCompany(handle) {
-        let res = await this.request(`companies/${handle}`);
+        const res = await this.request(`companies/${handle}`);
         return res.company;
     }
 
     /** Get list of companies. */
 
     static async getCompanies() {
-        let res = await this.request(`companies/`);
+        const res = await this.request(`companies/`);
         return res.companies;
     }
 
     /** Get list of companies filtering by name */
 
     static async searchCompany(nameLike) {
-        let res = await this.request(`companies/`, { nameLike });
+        const res = await this.request(`companies/`, { nameLike });
         return res.companies;
     }
 
@@ -68,14 +68,14 @@ class JoblyApi {
     /** Get list of jobs. */
 
     static async getJobs() {
-        let res = await this.request(`jobs/`);
+        const res = await this.request(`jobs/`);
         return res.jobs;
     }
 
     /** Get list of jobs filtering by title */
 
     static async searchJobs(title) {
-        let res = await this.request(`jobs/`, { title });
+        const res = await this.request(`jobs/`, { title });
         return res.jobs;
     }
 
@@ -91,7 +91,7 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
     */
     static async signUp(user) {
-        let res = await this.request(`auth/register/`, user, "post");
+        const res = await this.request(`auth/register/`, user, "post");
         JoblyApi.token = res.token;
         localStorage.setItem("token", JoblyApi.token);
         return await JoblyApi.getSignedInUser();
@@ -104,7 +104,7 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async login(credentials) {
-        let res = await this.request(`auth/token/`, credentials, "post");
+        const res = await this.request(`auth/token/`, credentials, "post");
         JoblyApi.token = res.token;
         localStorage.setItem("token", JoblyApi.token);
         return await JoblyApi.getSignedInUser();
@@ -117,10 +117,10 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async editProfile(profileData) {
-        let user = profileData;
+        const user = profileData;
         const { username, ...restOfUser } = user;
 
-        let res = await this.request(`users/${username}`, restOfUser, "patch")
+        const res = await this.request(`users/${username}`, restOfUser, "patch")
         return res.user
     }
 
@@ -130,7 +130,7 @@ class JoblyApi {
      */
     static async getSignedInUser() {
         const decoded = jwt_decode(this.token);
-        let res = await this.request(`users/${decoded.username}`)
+        const res = await this.request(`users/${decoded.username}`)
         return res.user;
     }
 
@@ -144,8 +144,7 @@ class JoblyApi {
      */
     static async applyToJob(jobId) {
         const decoded = jwt_decode(this.token);
-        console.log("!!!!!!!!jobId!!!!!!!!!", jobId);
-        let res = await this.request(
+        const res = await this.request(
             `users/${decoded.username}/jobs/${jobId}`,
             {},
             "post")
