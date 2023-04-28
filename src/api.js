@@ -85,7 +85,7 @@ class JoblyApi {
     /** Signs up a user given user data 
      * user like {username, password, firstName, lastName, email}
      * 
-     * sets token for further requests.
+     * sets token for future requests.
      * returns user info.
      * 
      * returns {username, firstName, lastName, email, applications[]}
@@ -93,8 +93,8 @@ class JoblyApi {
     static async signUp(user) {
         let res = await this.request(`auth/register/`, user, "post");
         JoblyApi.token = res.token;
-        const decoded = jwt_decode(JoblyApi.token)
-        return await JoblyApi.getSignedInUser(decoded.username);
+        localStorage.setItem("token", JoblyApi.token);
+        return await JoblyApi.getSignedInUser();
     }
 
     /** logs in a user, setting token for future requests.
@@ -106,8 +106,8 @@ class JoblyApi {
     static async login(credentials) {
         let res = await this.request(`auth/token/`, credentials, "post");
         JoblyApi.token = res.token;
-        const decoded = jwt_decode(JoblyApi.token)
-        return await JoblyApi.getSignedInUser(decoded.username);
+        localStorage.setItem("token", JoblyApi.token);
+        return await JoblyApi.getSignedInUser();
     }
 
     /** edits a user's profile and returns the user.
@@ -126,13 +126,11 @@ class JoblyApi {
 
     /** gets data about the currently signed in user
      * 
-     * takes username
-     * 
      * returns {username, firstName, lastName, email, applications[]}
      */
-    static async getSignedInUser(username) {
-        let res = await this.request(`users/${username}`)
-        console.log("Signed in as: ", res.user);
+    static async getSignedInUser() {
+        const decoded = jwt_decode(this.token);
+        let res = await this.request(`users/${decoded.username}`)
         return res.user;
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import userContext from './userContext';
+
 import './SignUpForm.css';
 
 
@@ -18,28 +18,31 @@ import './SignUpForm.css';
  * 
  * RoutesList -> ProfileForm
  */
-function ProfileForm ({ editProfile })  {//TODO: pass specifically as a prop
-  const { user } = useContext(userContext);
-  const navigate = useNavigate();
+function ProfileForm ({ editProfile, user })  {
+    const navigate = useNavigate();
+    
+    const initialFormData = {
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    }
+    
+    const [formData, setFormData] = useState(initialFormData);
+    const [errors, setErrors] = useState(null);
 
-  const initialFormData = {
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email
-  }
-  
-  const [formData, setFormData] = useState(initialFormData);
 
-
-    //TODO: handle errors here
     /** Send formData to parent
      *  Redirect to home
      */
     async function handleSubmit(evt) {
         evt.preventDefault();
-        await editProfile(formData);
-        navigate("/");
+        try {
+            await editProfile(formData);
+            navigate("/");
+        } catch (err) {
+            setErrors(err)
+        }
     }
 
     /** Update local state w/curr state of input elem */
@@ -50,7 +53,6 @@ function ProfileForm ({ editProfile })  {//TODO: pass specifically as a prop
             [name]: value,
         }));
     }
-
     /** render form */
     return (
         <div className="SignUpForm">
@@ -59,51 +61,57 @@ function ProfileForm ({ editProfile })  {//TODO: pass specifically as a prop
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
                             <div className='form-group'>
-                                <label htmlFor="name">Username:</label>
-                                <input
-                                    disabled
-                                    className='form-control'
-                                    name="username"
-                                    value={formData.username}
-                                    onChange={handleChange}
-                                />
+                                <label htmlFor="name">Username:
+                                    <input
+                                        disabled
+                                        className='form-control'
+                                        name="username"
+                                        value={formData.username}
+                                        onChange={handleChange}
+                                    />
+                                </label>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="firstName">First name:</label>
-                                <input
-                                    required
-                                    className='form-control'
-                                    name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                />
+                                <label htmlFor="firstName">First name:
+                                    <input
+                                        className='form-control'
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                    />
+                                </label>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="lastName">Last name:</label>
-                                <input
-                                    required
-                                    className='form-control'
-                                    name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                />
+                                <label htmlFor="lastName">Last name:
+                                    <input
+                                        className='form-control'
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                    />
+                                </label>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="email">Email:</label>
-                                <input
-                                    required
-                                    minLength={6}
-                                    className='form-control'
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                />
+                                <label htmlFor="email">Email:
+                                    <input
+                                        minLength={6}
+                                        className='form-control'
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                    />
+                                </label>
                             </div>
                             <button className="btn btn-primary">Submit</button>
                         </form>
+                        {errors &&
+                            <div className='text-danger'>{errors.map((e, idx) =>
+                                (<div key={idx}>{e.slice(e.indexOf(".") + 1)}</div>))}
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

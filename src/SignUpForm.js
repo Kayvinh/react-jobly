@@ -30,7 +30,7 @@ function SignUpForm({ signUp }) {
     /** Send formData to parent
      *  Redirect to home
      */
-    //TODO: handle errors here
+
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
