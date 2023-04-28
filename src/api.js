@@ -85,49 +85,61 @@ class JoblyApi {
     /** Signs up a user given user data 
      * user like {username, password, firstName, lastName, email}
      * 
-     * returns token
+     * sets token for further requests.
+     * returns user info.
+     * 
+     * returns {username, firstName, lastName, email, applications[]}
     */
     static async signUp(user) {
         let res = await this.request(`auth/register/`, user, "post");
-        return res.token;
+        JoblyApi.token = res.token;
+        const decoded = jwt_decode(JoblyApi.token)
+        return await JoblyApi.getSignedInUser(decoded.username);
     }
 
-    /** logs in a user, returning their token
+    /** logs in a user, setting token for future requests.
      * 
      * credentials like {username, password}
      * 
-     * returns token
+     * returns {username, firstName, lastName, email, applications[]}
      */
     static async login(credentials) {
         let res = await this.request(`auth/token/`, credentials, "post");
-        return res.token;
+        JoblyApi.token = res.token;
+        const decoded = jwt_decode(JoblyApi.token)
+        return await JoblyApi.getSignedInUser(decoded.username);
     }
 
-    /** edits user data, returning updated user
+    /** edits a user's profile and returns the user.
      * 
-     * formData like {username, firstName, lastName, email}
+     * profileData like {username, firstName, lastName, email}
      * 
-     * returns {username, firstName, lastName, email, applications[job, ...]}
+     * returns {username, firstName, lastName, email, applications[]}
      */
-    static async editProfile(formData){
-        let user = formData;
+    static async editProfile(profileData){
+        let user = profileData;
         const {username, ...restOfUser} = user;
         
         let res = await this.request(`users/${username}`, restOfUser, "patch")
         return res.user
     }
 
-    /** gets data about the signed in user
-     *
-     * returns {username, firstName, lastName, email, applications[job, ...]}
+    /** gets data about the currently signed in user
+     * 
+     * takes username
+     * 
+     * returns {username, firstName, lastName, email, applications[]}
      */
-    static async getSignedInUser() {
-        const decoded = jwt_decode(JoblyApi.token)
-        let res = await this.request(`users/${decoded.username}`)
+    static async getSignedInUser(username) {
+        let res = await this.request(`users/${username}`)
         console.log("Signed in as: ", res.user);
         return res.user;
     }
 
+    /** clears login token */
+    static clearToken() {
+        JoblyApi.token = '';
+    }
     
     // obviously, you'll add a lot here ...
 }

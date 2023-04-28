@@ -19,18 +19,25 @@ const initialFormData = {
  * State
  * -formData:
  *  {username, password, firstName, lastName, email}
+ * -errors: array of errors on bad submission
  * 
  * RoutesList -> signUpForm
  */
 function SignUpForm({ signUp }) {
     const [formData, setFormData] = useState(initialFormData);
+    const [errors, setErrors] = useState(null);
 
     /** Send formData to parent
      *  Redirect to home
      */
+    //TODO: handle errors here
     async function handleSubmit(evt) {
         evt.preventDefault();
-        await signUp(formData);
+        try {
+            await signUp(formData);
+        } catch (err) {
+            setErrors(err);
+        }
         return <Navigate to="/" />
     }
 
@@ -53,7 +60,6 @@ function SignUpForm({ signUp }) {
                             <div className='form-group'>
                                 <label htmlFor="name">Username:</label>
                                 <input
-                                    required
                                     className='form-control'
                                     name="username"
                                     value={formData.username}
@@ -64,8 +70,6 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="password">Password:</label>
                                 <input
-                                    required
-                                    minLength={5}
                                     className='form-control'
                                     type="password"
                                     name="password"
@@ -77,7 +81,6 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="firstName">First name:</label>
                                 <input
-                                    required
                                     className='form-control'
                                     name="firstName"
                                     value={formData.firstName}
@@ -88,7 +91,6 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="lastName">Last name:</label>
                                 <input
-                                    required
                                     className='form-control'
                                     name="lastName"
                                     value={formData.lastName}
@@ -99,8 +101,6 @@ function SignUpForm({ signUp }) {
                             <div className="form-group">
                                 <label htmlFor="email">Email:</label>
                                 <input
-                                    required
-                                    minLength={6}
                                     className='form-control'
                                     name="email"
                                     value={formData.email}
@@ -109,6 +109,11 @@ function SignUpForm({ signUp }) {
                             </div>
                             <button className="btn btn-primary">Submit</button>
                         </form>
+                        {errors &&
+                            <div className='text-danger'>{errors.map((e, idx) =>
+                                (<div>{e.slice(e.indexOf(".") + 1)}</div>))}
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

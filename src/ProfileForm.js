@@ -18,7 +18,7 @@ import './SignUpForm.css';
  * 
  * RoutesList -> ProfileForm
  */
-function ProfileForm ({ editProfile })  {
+function ProfileForm ({ editProfile })  {//TODO: pass specifically as a prop
   const { user } = useContext(userContext);
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function ProfileForm ({ editProfile })  {
   const [formData, setFormData] = useState(initialFormData);
 
 
-
+    //TODO: handle errors here
     /** Send formData to parent
      *  Redirect to home
      */

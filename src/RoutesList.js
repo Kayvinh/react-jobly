@@ -9,7 +9,7 @@ import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import ProfileForm from "./ProfileForm";
 
-
+//TODO: in docstring, specify exactly what context is
 /** renders our routes when navigated to
  * 
  * Props

@@ -29,8 +29,9 @@ function LoginForm ({ login })  {
      *    & clear form. */
     async function handleSubmit(evt) {
       evt.preventDefault();
+      const {username, password} = formData
       try {
-        await login(formData);
+        await login({username, password});
         return <Navigate to="/" />
       } catch(err) {
         setErrors(err);
