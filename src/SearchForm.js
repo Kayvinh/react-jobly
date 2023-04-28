@@ -31,7 +31,9 @@ function SearchForm({ search }) {
       [name]: value,
     }));
 
-    debounceSearch(formData.searchTerm);
+    if(formData.searchTerm.length > 1) {
+      debounceSearch(formData.searchTerm);
+    }
   }
 
   /** Call parent function and clear form. */
