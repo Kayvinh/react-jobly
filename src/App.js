@@ -22,6 +22,7 @@ import JoblyApi from "./api";
 function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  console.info("USER", user);
 
 
 

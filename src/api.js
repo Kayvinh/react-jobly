@@ -117,12 +117,13 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async editProfile(profileData) {
+        console.log(profileData);
         let user = profileData;
         const { username, ...restOfUser } = user;
 
         await this.request(`users/${username}`, restOfUser, "patch")
         let res = await this.getSignedInUser();
-        return res.user
+        return res
     }
 
     /** gets data about the currently signed in user
