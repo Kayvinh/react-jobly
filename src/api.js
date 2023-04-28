@@ -1,6 +1,5 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-// const axios = require("axios");
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -45,21 +44,21 @@ class JoblyApi {
     /** Get details on a company by handle. */
 
     static async getCompany(handle) {
-        const res = await this.request(`companies/${handle}`);
+        let res = await this.request(`companies/${handle}`);
         return res.company;
     }
 
     /** Get list of companies. */
 
     static async getCompanies() {
-        const res = await this.request(`companies/`);
+        let res = await this.request(`companies/`);
         return res.companies;
     }
 
     /** Get list of companies filtering by name */
 
     static async searchCompany(nameLike) {
-        const res = await this.request(`companies/`, { nameLike });
+        let res = await this.request(`companies/`, { nameLike });
         return res.companies;
     }
 
@@ -68,14 +67,14 @@ class JoblyApi {
     /** Get list of jobs. */
 
     static async getJobs() {
-        const res = await this.request(`jobs/`);
+        let res = await this.request(`jobs/`);
         return res.jobs;
     }
 
     /** Get list of jobs filtering by title */
 
     static async searchJobs(title) {
-        const res = await this.request(`jobs/`, { title });
+        let res = await this.request(`jobs/`, { title });
         return res.jobs;
     }
 
@@ -91,7 +90,7 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
     */
     static async signUp(user) {
-        const res = await this.request(`auth/register/`, user, "post");
+        let res = await this.request(`auth/register/`, user, "post");
         JoblyApi.token = res.token;
         localStorage.setItem("token", JoblyApi.token);
         return await JoblyApi.getSignedInUser();
@@ -104,7 +103,7 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async login(credentials) {
-        const res = await this.request(`auth/token/`, credentials, "post");
+        let res = await this.request(`auth/token/`, credentials, "post");
         JoblyApi.token = res.token;
         localStorage.setItem("token", JoblyApi.token);
         return await JoblyApi.getSignedInUser();
@@ -117,12 +116,11 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async editProfile(profileData) {
-        const user = profileData;
-        const { username, ...restOfUser } = user;
-
+        let user = profileData;
+        let { username, ...restOfUser } = user;
         await this.request(`users/${username}`, restOfUser, "patch")
-        const res = await this.getSignedInUser();
-        return res.user
+        let res = await this.getSignedInUser();
+        return res
     }
 
     /** gets data about the currently signed in user
@@ -130,8 +128,8 @@ class JoblyApi {
      * returns {username, firstName, lastName, email, applications[]}
      */
     static async getSignedInUser() {
-        const decoded = jwt_decode(this.token);
-        const res = await this.request(`users/${decoded.username}`)
+        let decoded = jwt_decode(this.token);
+        let res = await this.request(`users/${decoded.username}`)
         return res.user;
     }
 
@@ -144,8 +142,8 @@ class JoblyApi {
      * 
      */
     static async applyToJob(jobId) {
-        const decoded = jwt_decode(this.token);
-        const res = await this.request(
+        let decoded = jwt_decode(this.token);
+        let res = await this.request(
             `users/${decoded.username}/jobs/${jobId}`,
             {},
             "post")
