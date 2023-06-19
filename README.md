@@ -3,6 +3,7 @@ Job application platform with authentication/authorization features.
 
 **Note: Takes ~10 secs upon login to load**  
 Deployed on: https://kevin-jobly.surge.sh
+
 **User: guest  
 Password: password**  
 
